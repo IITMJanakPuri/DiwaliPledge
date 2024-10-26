@@ -40,34 +40,27 @@ function generateCertificate() {
 
         // Check if name width exceeds maxWidth and wrap text if necessary
         const textWidth = context.measureText(name).width;
-        let lines = [];
-        let currentLine = '';
-        let lineY = nameBaseY;
-
         if (textWidth > maxWidth) {
             const words = name.split(' ');
+            let currentLine = '';
+            let lineY = nameBaseY;
 
             for (let i = 0; i < words.length; i++) {
                 let testLine = currentLine + words[i] + ' ';
                 let testWidth = context.measureText(testLine).width;
 
                 if (testWidth > maxWidth && i > 0) {
-                    lines.push(currentLine.trim());
+                    context.fillText(currentLine, nameBaseX, lineY);
                     currentLine = words[i] + ' ';
+                    lineY += fontSize + 5; // Move to next line with spacing
                 } else {
                     currentLine = testLine;
                 }
             }
-            lines.push(currentLine.trim()); // Final line
+            context.fillText(currentLine, nameBaseX, lineY); // Final line
         } else {
-            lines.push(name); // Single line if it fits
+            context.fillText(name, nameBaseX, nameBaseY); // Single line if it fits
         }
-
-        // Draw all lines
-        lines.forEach((line) => {
-            context.fillText(line, nameBaseX, lineY);
-            lineY += fontSize + 5; // Move to next line with spacing
-        });
 
         // Draw course text in its fixed position
         context.font = 'bold 38px Arial';

@@ -2,11 +2,6 @@ function generateCertificate() {
     const name = document.getElementById('name').value;
     const course = document.getElementById('myDropdown').value;
 
-    if (!name || !course) {
-        alert('Please fill out all fields.');
-        return;
-    }
-
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     const image = new Image();

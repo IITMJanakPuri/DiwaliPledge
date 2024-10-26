@@ -1,0 +1,139 @@
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+body {
+    max-width: 100vw; /* Prevent the body from exceeding the viewport width */
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 90%;
+    margin: 20px;
+    overflow: hidden; /* Ensure no content overflows the container */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center elements horizontally */
+}
+
+.container img {
+    width: 100px; /* Adjust the size as needed */
+    height: auto;
+    margin-bottom: 20px; /* Space between the logo and the heading */
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1rem;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.right img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    border-radius: 10px;
+}
+
+h1 {
+    color: #FE9B00;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 576px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    label, input, select, button {
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-content {
+        flex-direction: row;
+        gap: 3vw;
+    }
+
+    .left, .right {
+        width: 50%;
+    }
+
+    button {
+        width: auto;
+        font-size: 1.2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 40px;
+    }
+
+    label, input, select, button {
+        font-size: 1.3rem;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 800px;
+    }
+}

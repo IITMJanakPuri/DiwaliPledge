@@ -1,13 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('certificateForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-    });
-});
-
 function generateCertificate() {
     const name = document.getElementById('name').value;
     const course = document.getElementById('myDropdown').value;
-    
+
     if (!name || !course) {
         alert('Please fill out all fields.');
         return;
@@ -23,46 +17,69 @@ function generateCertificate() {
 
         context.drawImage(image, 0, 0);
 
-        // Base positions (adjust these as needed)
-        const nameBaseX = 420; // X position for the name
-        const nameBaseY = 760; // Y position for the name, aligned with "I,"
+        // Set initial font details
+        let fontSize = 38;
+        let maxWidth = 500; // Maximum width for name text to prevent overflow
 
-        const courseBaseX = 1030; // X position for the course
-        const courseBaseY = 764; // Y position for the course, aligned with "of"
+        // Adjust font size if name length is long
+        if (name.length > 15) {
+            fontSize = 30; // Smaller font for long names
+        } else if (name.length > 10) {
+            fontSize = 34; // Moderate reduction for medium names
+        }
 
-        // Offset values for finer adjustments
-        const nameOffsetX = 0; // Adjust left or right by changing this value
-        const nameOffsetY = 0; // Adjust up or down by changing this value
-
-        const courseOffsetX = 0; // Adjust left or right by changing this value
-        const courseOffsetY = 0; // Adjust up or down by changing this value
-
-        // Final positions after applying offsets
-        const nameFinalX = nameBaseX + nameOffsetX;
-        const nameFinalY = nameBaseY + nameOffsetY;
-
-        const courseFinalX = courseBaseX + courseOffsetX;
-        const courseFinalY = courseBaseY + courseOffsetY;
-
-        // Adding the text to the canvas
-        context.font = 'bold 50px Open Sans';
+        context.font = `bold ${fontSize}px Arial`;
         context.fillStyle = '#000';
         context.textAlign = 'left';
 
-        // Draw the name after "I,"
-        context.fillText(name, nameFinalX, nameFinalY);
+        // Base positions for name and course
+        let nameBaseX = 360;
+        let nameBaseY = 760;
+        const courseBaseX = 1100;
+        const courseBaseY = 764;
 
-        // Draw the course name after "of"
-        context.fillText(course, courseFinalX, courseFinalY);
+        // Check if name width exceeds maxWidth and wrap text if necessary
+        const textWidth = context.measureText(name).width;
+        let lines = [];
+        let currentLine = '';
+        let lineY = nameBaseY;
 
+        if (textWidth > maxWidth) {
+            const words = name.split(' ');
+
+            for (let i = 0; i < words.length; i++) {
+                let testLine = currentLine + words[i] + ' ';
+                let testWidth = context.measureText(testLine).width;
+
+                if (testWidth > maxWidth && i > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = words[i] + ' ';
+                } else {
+                    currentLine = testLine;
+                }
+            }
+            lines.push(currentLine.trim()); // Final line
+        } else {
+            lines.push(name); // Single line if it fits
+        }
+
+        // Draw all lines
+        lines.forEach((line) => {
+            context.fillText(line, nameBaseX, lineY);
+            lineY += fontSize + 5; // Move to next line with spacing
+        });
+
+        // Draw course text in its fixed position
+        context.font = 'bold 38px Arial';
+        context.fillText(course, courseBaseX, courseBaseY);
+
+        // Create a download link for the certificate
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
         link.download = 'certificate.png';
 
         document.body.appendChild(link);
         link.click();
-
-        // Clean up
         document.body.removeChild(link);
     };
 

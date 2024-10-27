@@ -9,31 +9,30 @@ function generateCertificate() {
     image.onload = () => {
         canvas.width = image.width;
         canvas.height = image.height;
-
         context.drawImage(image, 0, 0);
 
-        // Set initial font details
+        // Font settings
         let fontSize = 38;
-        let maxWidth = 500; // Maximum width for name text to prevent overflow
+        let maxWidth = 900;
 
         // Adjust font size if name length is long
         if (name.length > 15) {
-            fontSize = 30; // Smaller font for long names
+            fontSize = 38;
         } else if (name.length > 10) {
-            fontSize = 34; // Moderate reduction for medium names
+            fontSize = 38;
         }
 
         context.font = `bold ${fontSize}px Arial`;
         context.fillStyle = '#000';
         context.textAlign = 'left';
 
-        // Base positions for name and course
-        let nameBaseX = 360;
+        // Position coordinates
+        let nameBaseX = 250;
         let nameBaseY = 760;
-        const courseBaseX = 1100;
+        const courseBaseX = 1050;
         const courseBaseY = 764;
 
-        // Check if name width exceeds maxWidth and wrap text if necessary
+        // Check if name width exceeds maxWidth
         const textWidth = context.measureText(name).width;
         if (textWidth > maxWidth) {
             const words = name.split(' ');
@@ -47,25 +46,24 @@ function generateCertificate() {
                 if (testWidth > maxWidth && i > 0) {
                     context.fillText(currentLine, nameBaseX, lineY);
                     currentLine = words[i] + ' ';
-                    lineY += fontSize + 5; // Move to next line with spacing
+                    lineY += fontSize + 5;
                 } else {
                     currentLine = testLine;
                 }
             }
-            context.fillText(currentLine, nameBaseX, lineY); // Final line
+            context.fillText(currentLine, nameBaseX, lineY);
         } else {
-            context.fillText(name, nameBaseX, nameBaseY); // Single line if it fits
+            context.fillText(name, nameBaseX, nameBaseY);
         }
 
-        // Draw course text in its fixed position
+        // Draw course text
         context.font = 'bold 38px Arial';
         context.fillText(course, courseBaseX, courseBaseY);
 
-        // Create a download link for the certificate
+        // Download the certificate
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
         link.download = 'certificate.png';
-
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

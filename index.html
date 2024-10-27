@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IITM- Diwali Pledge</title>
-    <!-- <link rel="shortcut icon" href="favicon.png" type="image/x-icon"> -->
+    <title>IITM - Diwali Pledge</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,7 +12,7 @@
         <h3 style="color: red;">Institute of Information Technology & Management, Janakpuri</h3>
         <h1>Eco-Friendly Diwali</h1>
         <h3>मैं शपथ लेता/लेती हूँ कि मैं पर्यावरण की स्थिरता में योगदान देने के लिए इस दिवाली को एक पर्यावरण-अनुकूल (ईको-फ्रेंडली) तरीके से मनाऊंगा/मनाऊंगी।</h3>
-        <h3>I pledge for contributing towards sustainability of environment by celebrating the Diwali in on Eco-Friendly manner.</h3>
+        <h3>I pledge for contributing towards sustainability of environment by celebrating Diwali in an Eco-Friendly manner.</h3>
         <div class="main-content">
             <div class="left">
                 <h1 style="color: #E0636F;">Take the Pledge/ शपथ लें</h1>
@@ -21,12 +20,12 @@
                 <form id="certificateForm">
                     <label for="myDropdown">Select Course:</label>
                     <select id="myDropdown" name="course" onchange="showOtherInput()" style="cursor: pointer;">
-                        <option style="cursor: pointer;" value="BCA">BCA</option>
-                        <option style="cursor: pointer;" value="MCA">MCA</option>
-                        <option style="cursor: pointer;" value="BCA">BBA</option>
-                        <option style="cursor: pointer;" value="MBA">MBA</option>
-                        <option style="cursor: pointer;" value="BA(JMC)">BA(JMC)</option>
-                        <option style="cursor: pointer;" value="B.Com(H)">B.Com(H)</option>
+                        <option value="BCA">BCA</option>
+                        <option value="MCA">MCA</option>
+                        <option value="BBA">BBA</option>
+                        <option value="MBA">MBA</option>
+                        <option value="BA(JMC)">BA(JMC)</option>
+                        <option value="B.Com(H)">B.Com(H)</option>
                     </select>
                     <div id="otherInput" style="display:none;">
                         <label for="otherText">Please specify:</label>
@@ -34,10 +33,7 @@
                     </div>
                     <label for="name">Enter Your Name:</label>
                     <input type="text" id="name" name="stuname" required>
-                    <!-- <label for="email">Enter Your Email:</label> -->
-                    <!-- <input type="email" id="email" name="email" required> -->
-                    <!-- <p id="emailError" style="color: red;"></p> -->
-                    <input type="submit" value="Download Certificate" onclick="generateCertificate()">
+                    <input type="button" value="Download Certificate" onclick="generateCertificate()">
                 </form>
             </div>
             <div class="right">
